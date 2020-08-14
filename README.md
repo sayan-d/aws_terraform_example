@@ -14,7 +14,8 @@ terraform plan -target=module.ec2_demo_1_pvt
 terraform apply -target=module.ec2_demo_1_pvt
 ```
 
-## Launch EC2 in Public subnet (A docker container with sample hello-world is launched here based on userdata)
+## Launch EC2 in Public subnet 
+### (A docker container with sample hello-world is launched here based on userdata)
 ```
 terraform plan -target=module.ec2_demo_1_pub
 terraform apply -target=module.ec2_demo_1_pub
