@@ -68,3 +68,13 @@ variable "tags" {
   type        = map(string)
   description = "Extra tags to attach to the EC2 resources"
 }
+
+variable "docker_image" {
+  type = string
+  default = ""
+}
+
+variable "azs" {
+  type = list
+  default = []
+}

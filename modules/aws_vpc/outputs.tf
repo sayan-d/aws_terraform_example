@@ -22,3 +22,8 @@ output "nat_gateway_ips" {
   value       = aws_eip.nat.*.public_ip
   description = "List of Elastic IPs associated with NAT gateways"
 }
+
+output "availability_zones" {
+  description = "A list of availability zones specified as argument to this module"
+  value       = var.availability_zones
+}

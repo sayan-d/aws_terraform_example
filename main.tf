@@ -12,15 +12,17 @@ module "vpc_demo_1" {
   environment = "dev"
 }
 
-locals {
-  instance-userdata = <<EOF
+#locals {
+#  instance-userdata = <<EOF
 
 #!/bin/bash
-yum install -y docker
-service docker start && chkconfig docker on
-docker run -d --name hello-world -p 80:80 karthequian/helloworld:latest
-EOF
-}
+#yum install -y docker
+#service docker start && chkconfig docker on
+#docker run -d --name hello-world -p 80:80 karthequian/helloworld:latest
+#EOF
+#}
+
+#Moved userdata to a template file
 
 module "ec2_demo_1_pub" {
   source = "./modules/aws_ec2"
@@ -35,7 +37,8 @@ module "ec2_demo_1_pub" {
   key_name            = "sayan_aws-test_us-east-1"
   project             = "demo-1"
   environment         = "dev"
-  ec2_user_data       = base64encode(local.instance-userdata)
+  # Userdata Variable
+  docker_image        = "karthequian/helloworld:latest"
 }
 
 module "ec2_demo_1_pvt" {
@@ -51,4 +54,6 @@ module "ec2_demo_1_pvt" {
   key_name            = "sayan_aws-test_us-east-1"
   project             = "demo-1"
   environment         = "dev"
+  azs		      = module.vpc_demo_1.availability_zones
 }
+
